@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_api_integration/services/api_service.dart';
+import 'package:flutter_app_api_integration/services/locator.dart';
+import 'package:flutter_app_api_integration/utils/constant.dart';
 
 void main() {
+  setupLocator();
   runApp(const MyApp());
 }
 
@@ -59,6 +63,18 @@ class _MyHomePageState extends State<MyHomePage> {
       // called again, and so nothing would appear to happen.
       _counter++;
     });
+  }
+
+  @override
+  void initState() {
+    textConnect();
+    super.initState();
+  }
+
+  Future textConnect() async {
+    var apiService = ApiService();
+    var response = apiService.connect('/1', {}, Constant.GET);
+    return response;
   }
 
   @override
